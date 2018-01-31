@@ -98,6 +98,12 @@
         <p>The remote JSON key you want to render. if null, render directly using the remote JSON(should be Array).</p>
       </div>
       <div>
+        <p>async-function</p>
+        <p><code>Function</code></p>
+        <p><code>null</code></p>
+        <p>A custom function for getting asynchronous suggestions. Expected to return a Promise. The promise should resolve to return a JSON object.</p>
+      </div>
+      <div>
         <p>limit</p>
         <p><code>Number</code></p>
         <p><code>8</code></p>

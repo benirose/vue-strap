@@ -26,6 +26,7 @@ var DELAY = 300
 
 export default {
   props: {
+    asyncFunction: {type: Function},
     async: {type: String},
     data: {type: Array},
     delay: {type: Number, default: DELAY},
@@ -71,7 +72,7 @@ export default {
   },
   methods: {
     setItems (data) {
-      if (this.async) {
+      if (this.async || this.asyncFunction) {
         this.items = this.asyncKey ? data[this.asyncKey] : data
         this.items = this.items.slice(0, this.limit)
       } else {
@@ -114,7 +115,11 @@ export default {
         return
       }
       this.asign = ''
-      if (this.async) {
+      if (this.asyncFunction) {
+        this.asyncFunction(this.val).then(data => {
+          this.setItems(data)
+        })
+      } else if (this.async) {
         getJSON(this.async + this.val).then(data => {
           this.setItems(data)
         })
