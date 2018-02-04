@@ -4,7 +4,7 @@
       v-model="val"
       :placeholder="placeholder"
       :type.once="type"
-      @blur="showDropdown = false"
+      @blur="blur"
       @keydown.down.prevent="down"
       @keydown.enter="hit"
       @keydown.esc="reset"
@@ -106,6 +106,10 @@ export default {
     down () {
       if (this.current < this.items.length - 1) { this.current++ }
       else { this.current = 0 }
+    },
+    blur () {
+      this.$emit('blur');
+      this.showDropdown = false;
     }
   },
   created () {
