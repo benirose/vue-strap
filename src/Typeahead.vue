@@ -4,6 +4,8 @@
       v-model="val"
       :placeholder="placeholder"
       :type.once="type"
+      :disabled="disabled"
+      :readonly="readonly"
       @blur="blur"
       @keydown.down.prevent="down"
       @keydown.enter="hit"
@@ -41,7 +43,9 @@ export default {
     placeholder: {type: String},
     template: {type: String},
     type: {type: String, default: 'text'},
-    value: {type: String, default: ''}
+    value: {type: String, default: ''},
+    disabled: {type: Boolean, default: false},
+    readonly: {type: Boolean, default: false},
   },
   data () {
     return {
