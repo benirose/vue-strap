@@ -1,7 +1,7 @@
 var config = require('./webpack.config.js')
 
 config.entry = {
-  'vue-strap': './src/index.js',
+  'vue2-strap3': './src/index.js',
 }
 
 config.output = {

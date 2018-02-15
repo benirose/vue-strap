@@ -1,5 +1,5 @@
-# vue-strap
-Bootstrap components built with Vue.js.
+# vue2-strap3
+Bootstrap 3 components built with Vue.js 2.0.
 
 This repository contains a set of native Vue.js components based on Bootstrap's markup and CSS. As a result no dependency on jQuery or Bootstrap's JavaScript is required. The only required dependencies are:
 
@@ -11,14 +11,14 @@ This repository contains a set of native Vue.js components based on Bootstrap's 
 ### NPM
 
 ```bash
-$ npm install github:wffranco/vue-strap --save
+$ npm install github:waytohealth/vue2-strap3 --save
 ```
 
 ### CommonJS
 ```js
-var alert = require('vue-strap/src/alert');
+var alert = require('vue2-strap3/src/alert');
 // or
-var alert = require('vue-strap').alert;
+var alert = require('vue2-strap3').alert;
 
 new Vue({
   components: {
@@ -29,9 +29,9 @@ new Vue({
 
 ### ES6
 ```js
-import alert from 'vue-strap/src/alert'
+import alert from 'vue2-strap3/src/alert'
 // or
-import { alert } from 'vue-strap'
+import { alert } from 'vue2-strap3'
 
 new Vue({
   components: {
@@ -44,7 +44,7 @@ new Vue({
 ```js
 $ bower install vue-strap
 
-define(['vue-strap'], function(VueStrap) { var alert = VueStrap.alert; ... });
+define(['vue2-strap3'], function(VueStrap) { var alert = VueStrap.alert; ... });
 ```
 
 ### Browser globals
