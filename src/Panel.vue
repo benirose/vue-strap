@@ -41,6 +41,9 @@ export default {
   },
   methods: {
     toggle () {
+      if (!this.$parent.clickable) {
+        return;
+      }
       this.open = !this.open
       if (this.inAccordion) {
         this.$parent.openChild(this)

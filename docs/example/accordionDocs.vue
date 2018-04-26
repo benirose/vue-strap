@@ -70,6 +70,12 @@
         <p><code>false</code></p>
         <p>Control whether expanding an item will cause the other items to close.</p>
       </div>
+      <div>
+        <p>clickable</p>
+        <p><code>Boolean</code></p>
+        <p><code>true</code></p>
+        <p>Disables ability to click for panel change, leaving panels to be controlled programatically.</p>
+      </div>
     </doc-table>
     <doc-table name="Panel">
       <div>

@@ -15,6 +15,10 @@ export default {
     oneAtAtime: {
       type: Boolean,
       default: false
+    },
+    clickable: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
