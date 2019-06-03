@@ -6,9 +6,9 @@
   ],
   "description": "Boostrap components built with Vue.js",
   "main": [
-    "dist/vue-strap.js",
-    "dist/vue-strap.js.map",
-    "dist/vue-strap.min.js"
+    "dist/vue2-strap3.js",
+    "dist/vue2-strap3.js.map",
+    "dist/vue2-strap3.min.js"
   ],
   "moduleType": ["amd","globals"],
   "keywords": [
