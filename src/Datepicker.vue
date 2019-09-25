@@ -272,13 +272,18 @@ export default {
         return true;
       }
 
-      if (this.disableToday && date == today) {
+      if (this.disableToday && date.getTime() == today.getTime()) {
         return true;
       }
 
       if (this.disableFutureDates && date > today) {
         return true;
       }
+    },
+    isToday (date) {
+      let today = new Date();
+      today.setHours(0,0,0,0);
+      return date.getTime() == today.getTime();
     },
     getDateRange () {
       this.dateRange = []
@@ -324,6 +329,8 @@ export default {
         }
         if (i == time.day && date.getFullYear() == time.year && date.getMonth() == time.month){
           sclass = 'datepicker-dateRange-item-active'
+        } else if (this.isToday(date)) {
+          sclass = 'today-marker'
         }
         this.dateRange.push({text: i, date, sclass})
       }
@@ -479,5 +486,16 @@ input.datepicker-input.with-reset-button {
 }
 .datepicker-nextBtn {
   right: 2px;
+}
+.today-marker:before {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: inline-block;
+  content: '';
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-top-color: rgba(0, 0, 0, .2);
+  border-bottom-color: #01256e;
 }
 </style>
