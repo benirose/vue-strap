@@ -80,6 +80,9 @@ export default {
     value: {type: String},
     format: {default: 'MM/dd/yyyy'},
     disabledDaysOfWeek: {type: Array, default () { return [] }},
+    disablePastDates: {type: Boolean, default: false},
+    disableToday: {type: Boolean, default: false},
+    disableFutureDates: {type: Boolean, default: false},
     width: {type: String},
     clearButton: {type: Boolean, default: false},
     lang: {type: String, default: navigator.language},
@@ -95,7 +98,7 @@ export default {
       displayDayView: false,
       displayMonthView: false,
       displayYearView: false,
-      val: this.value
+      val: this.value,
     }
   },
   watch: {
@@ -258,6 +261,25 @@ export default {
       }
       return dict[month]
     },
+    isDisabled (date) {
+      if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+        return true;
+      }
+      let today = new Date();
+      today.setHours(0,0,0,0);
+
+      if (this.disablePastDates && date < today) {
+        return true;
+      }
+
+      if (this.disableToday && date == today) {
+        return true;
+      }
+
+      if (this.disableFutureDates && date > today) {
+        return true;
+      }
+    },
     getDateRange () {
       this.dateRange = []
       this.decadeRange = []
@@ -287,7 +309,7 @@ export default {
           const dayText = prevMonthDayCount - firstDayWeek + i + 1
           const date = new Date(preMonth.year, preMonth.month, dayText)
           let sclass = 'datepicker-item-gray'
-          if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+          if (this.isDisabled(date)) {
             sclass = 'datepicker-item-disable'
           }
           this.dateRange.push({text: dayText, date, sclass })
@@ -297,7 +319,7 @@ export default {
       for (let i = 1; i <= dayCount; i++) {
         const date = new Date(time.year, time.month, i)
         let sclass = ''
-        if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+        if (this.isDisabled(date)) {
           sclass = 'datepicker-item-disable'
         }
         if (i == time.day && date.getFullYear() == time.year && date.getMonth() == time.month){
@@ -313,7 +335,7 @@ export default {
         for (let i = 1; i <= nextMonthNeed; i++) {
           const date = new Date(nextMonth.year, nextMonth.month, i)
           let sclass = 'datepicker-item-gray'
-          if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+          if (this.isDisabled(date)) {
             sclass = 'datepicker-item-disable'
           }
           this.dateRange.push({text: i, date, sclass})
