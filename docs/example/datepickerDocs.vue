@@ -4,10 +4,15 @@
       <p>
         <pre>Selected date is: {{dateString}}</pre>
       </p>
-      <datepicker ref="dp" v-model="date" :name="name" :disabled-days-of-week="disabled" :format="format" :clear-button="clear" :placeholder="placeholder" width="370px"></datepicker>
+      <datepicker ref="dp" v-model="date" :name="name" :disabled-days-of-week="disabled" :disable-past-dates="disablePastDates" :disable-today="disableToday" :disable-future-dates="disableFutureDates" :format="format" :clear-button="clear" :placeholder="placeholder" width="370px"></datepicker>
       <h4>Disabled days of week</h4>
 
       <v-select multiple v-model="disabled" :options="[0,1,2,3,4,5,6]"></v-select>
+
+      <h4>Disable dates</h4>
+      <checkbox :value="disablePastDates" @checked="disablePastDates = arguments[0]" type="primary">disable past dates</checkbox>
+      <checkbox :value="disableToday" @checked="disableToday = arguments[0]" type="primary">disable today</checkbox>
+      <checkbox :value="disableFutureDates" @checked="disableFutureDates = arguments[0]" type="primary">disable future dates</checkbox>
 
       <h4>Format</h4>
       <v-select v-model="format" :options="formats"></v-select>
@@ -102,11 +107,14 @@ export default {
   data () {
     return {
       clear: true,
+      disablePastDates: false,
+      disableToday: false,
+      disableFutureDates: false,
       disabled: [],
-      format: 'yyyy-MM-dd',
+      format: 'MM/dd/yyyy',
       formats: ['dd/MM/yyyy', 'dd-MM-yyyy', 'yyyy,MM,dd', 'yyyy-MM-dd', 'yyyy.MM.dd', 'MMM/dd/yyyy', 'MMMM/dd/yyyy', 'MM/dd/yyyy', 'MM-dd-yyyy'],
       placeholder: 'placeholder is displayed when value is null or empty',
-      date: '2015-06-10'
+      date: '10/02/2019'
     }
   },
   computed: {

@@ -80,6 +80,9 @@ export default {
     value: {type: String},
     format: {default: 'MM/dd/yyyy'},
     disabledDaysOfWeek: {type: Array, default () { return [] }},
+    disablePastDates: {type: Boolean, default: false},
+    disableToday: {type: Boolean, default: false},
+    disableFutureDates: {type: Boolean, default: false},
     width: {type: String},
     clearButton: {type: Boolean, default: false},
     lang: {type: String, default: navigator.language},
@@ -95,7 +98,7 @@ export default {
       displayDayView: false,
       displayMonthView: false,
       displayYearView: false,
-      val: this.value
+      val: this.value,
     }
   },
   watch: {
@@ -179,7 +182,7 @@ export default {
       this.currDate = new Date(year, this.currDate.getMonth(), this.currDate.getDate())
     },
     daySelect (day) {
-      if (day.sclass === 'datepicker-item-disable') {
+      if (day.sclass.indexOf('datepicker-item-disable') > -1) {
         return false
       } else {
         this.currDate = day.date
@@ -258,6 +261,30 @@ export default {
       }
       return dict[month]
     },
+    isDisabled (date) {
+      if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+        return true;
+      }
+      let today = new Date();
+      today.setHours(0,0,0,0);
+
+      if (this.disablePastDates && date < today) {
+        return true;
+      }
+
+      if (this.disableToday && date.getTime() == today.getTime()) {
+        return true;
+      }
+
+      if (this.disableFutureDates && date > today) {
+        return true;
+      }
+    },
+    isToday (date) {
+      let today = new Date();
+      today.setHours(0,0,0,0);
+      return date.getTime() == today.getTime();
+    },
     getDateRange () {
       this.dateRange = []
       this.decadeRange = []
@@ -287,7 +314,7 @@ export default {
           const dayText = prevMonthDayCount - firstDayWeek + i + 1
           const date = new Date(preMonth.year, preMonth.month, dayText)
           let sclass = 'datepicker-item-gray'
-          if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+          if (this.isDisabled(date)) {
             sclass = 'datepicker-item-disable'
           }
           this.dateRange.push({text: dayText, date, sclass })
@@ -296,14 +323,17 @@ export default {
 
       for (let i = 1; i <= dayCount; i++) {
         const date = new Date(time.year, time.month, i)
-        let sclass = ''
-        if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
-          sclass = 'datepicker-item-disable'
+        let sclass = [];
+        if (this.isDisabled(date)) {
+          sclass.push('datepicker-item-disable')
         }
         if (i == time.day && date.getFullYear() == time.year && date.getMonth() == time.month){
-          sclass = 'datepicker-dateRange-item-active'
+          sclass.push('datepicker-dateRange-item-active')
         }
-        this.dateRange.push({text: i, date, sclass})
+        if (this.isToday(date)) {
+          sclass.push('today-marker')
+        }
+        this.dateRange.push({text: i, date, sclass: sclass.join(" ")})
       }
 
       if (this.dateRange.length < 42) {
@@ -313,7 +343,7 @@ export default {
         for (let i = 1; i <= nextMonthNeed; i++) {
           const date = new Date(nextMonth.year, nextMonth.month, i)
           let sclass = 'datepicker-item-gray'
-          if (this.disabledDaysArray.indexOf(date.getDay()) > -1) {
+          if (this.isDisabled(date)) {
             sclass = 'datepicker-item-disable'
           }
           this.dateRange.push({text: i, date, sclass})
@@ -457,5 +487,22 @@ input.datepicker-input.with-reset-button {
 }
 .datepicker-nextBtn {
   right: 2px;
+}
+.today-marker {
+  position: relative;
+}
+.today-marker:before {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: inline-block;
+  content: '';
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-top-color: rgba(0, 0, 0, .2);
+  border-bottom-color: #01256e;
+}
+.datepicker-dateRange-item-active.today-marker:before {
+  border-bottom-color: white;
 }
 </style>
