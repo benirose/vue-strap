@@ -182,7 +182,7 @@ export default {
       this.currDate = new Date(year, this.currDate.getMonth(), this.currDate.getDate())
     },
     daySelect (day) {
-      if (day.sclass === 'datepicker-item-disable') {
+      if (day.sclass.includes('datepicker-item-disable')) {
         return false
       } else {
         this.currDate = day.date
@@ -323,16 +323,17 @@ export default {
 
       for (let i = 1; i <= dayCount; i++) {
         const date = new Date(time.year, time.month, i)
-        let sclass = ''
+        let sclass = [];
         if (this.isDisabled(date)) {
-          sclass = 'datepicker-item-disable'
+          sclass.push('datepicker-item-disable')
         }
         if (i == time.day && date.getFullYear() == time.year && date.getMonth() == time.month){
-          sclass = 'datepicker-dateRange-item-active'
-        } else if (this.isToday(date)) {
-          sclass = 'today-marker'
+          sclass.push('datepicker-dateRange-item-active')
         }
-        this.dateRange.push({text: i, date, sclass})
+        if (this.isToday(date)) {
+          sclass.push('today-marker')
+        }
+        this.dateRange.push({text: i, date, sclass: sclass.join(" ")})
       }
 
       if (this.dateRange.length < 42) {
@@ -487,6 +488,9 @@ input.datepicker-input.with-reset-button {
 .datepicker-nextBtn {
   right: 2px;
 }
+.today-marker {
+  position: relative;
+}
 .today-marker:before {
   position: absolute;
   right: 4px;
@@ -497,5 +501,8 @@ input.datepicker-input.with-reset-button {
   border-width: 0 0 7px 7px;
   border-top-color: rgba(0, 0, 0, .2);
   border-bottom-color: #01256e;
+}
+.datepicker-dateRange-item-active.today-marker:before {
+  border-bottom-color: white;
 }
 </style>
