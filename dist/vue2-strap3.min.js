@@ -1,5 +1,5 @@
 /*!
- * @waytohealth/vue2-strap3 2.2.0
+ * @waytohealth/vue2-strap3 2.2.1
  * http://waytohealth.github.io/vue2-strap3/
  * Compiled using Vue 2.5.13
  */
