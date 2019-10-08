@@ -1,5 +1,5 @@
 {
-  "name": "vue2-strap3",
+  "name": "@waytohealth/vue2-strap3",
   "version": "2.1.1",
   "description": "Bootstrap components built with Vue.js",
   "main": "dist/vue2-strap3.js",
