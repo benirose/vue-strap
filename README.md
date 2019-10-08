@@ -13,14 +13,14 @@ This repository contains a set of native Vue.js components based on Bootstrap's 
 ### NPM
 
 ```bash
-$ npm install github:waytohealth/vue2-strap3 --save
+$ npm install @waytohealth/vue2-strap3 --save
 ```
 
 ### CommonJS
 ```js
-var alert = require('vue2-strap3/src/alert');
+var alert = require('@waytohealth/vue2-strap3/src/alert');
 // or
-var alert = require('vue2-strap3').alert;
+var alert = require('@waytohealth/vue2-strap3').alert;
 
 new Vue({
   components: {
@@ -31,9 +31,9 @@ new Vue({
 
 ### ES6
 ```js
-import alert from 'vue2-strap3/src/alert'
+import alert from '@waytohealth/vue2-strap3/src/alert'
 // or
-import { alert } from 'vue2-strap3'
+import { alert } from '@waytohealth/vue2-strap3'
 
 new Vue({
   components: {
