@@ -1,6 +1,6 @@
 {
   "name": "@waytohealth/vue2-strap3",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Bootstrap components built with Vue.js",
   "main": "dist/vue2-strap3.js",
   "typings": "types/index.d.ts",
