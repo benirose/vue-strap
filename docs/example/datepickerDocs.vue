@@ -41,7 +41,7 @@
       <div>
         <p>format</p>
         <p><code>String</code></p>
-        <p><code>MMMM/dd/yyyy</code></p>
+        <p><code>MM/dd/yyyy</code></p>
         <p>The date format, combination of d, dd, M, MM, MMM, MMMM, yyyy.</p>
       </div>
       <div>
@@ -114,7 +114,7 @@ export default {
       format: 'MM/dd/yyyy',
       formats: ['dd/MM/yyyy', 'dd-MM-yyyy', 'yyyy,MM,dd', 'yyyy-MM-dd', 'yyyy.MM.dd', 'MMM/dd/yyyy', 'MMMM/dd/yyyy', 'MM/dd/yyyy', 'MM-dd-yyyy'],
       placeholder: 'placeholder is displayed when value is null or empty',
-      date: '10/02/2019'
+      date: '2019-10-03'
     }
   },
   computed: {
