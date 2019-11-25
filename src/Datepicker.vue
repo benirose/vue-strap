@@ -73,6 +73,7 @@
 
 <script>
 import {translations} from './utils/utils.js'
+import dateParse from 'date-fns/parse'
 // import $ from './utils/NodeList.js'
 
 export default {
@@ -249,7 +250,7 @@ export default {
       if (str === undefined || str === null) { str = this.val }
       let date = str.length === 10 && (this.format === 'dd-MM-yyyy' || this.format === 'dd/MM/yyyy' || this.format === 'dd.MM.yyyy') ?
         new Date(str.substring(6, 10), str.substring(3, 5)-1, str.substring(0, 2)) :
-        new Date(str)
+        dateParse(str)
       return isNaN(date.getFullYear()) ? new Date() : date
     },
     getDayCount (year, month) {
@@ -354,6 +355,7 @@ export default {
   mounted () {
     this.$emit('child-created', this)
     this.currDate = this.parse(this.val) || this.parse(new Date())
+    this.val = this.stringify(this.parse(this.value))
     this._blur = e => {
       if (!this.$el.contains(e.target))
         this.close()
