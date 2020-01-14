@@ -355,7 +355,9 @@ export default {
   mounted () {
     this.$emit('child-created', this)
     this.currDate = this.parse(this.val) || this.parse(new Date())
-    this.val = this.stringify(this.parse(this.value))
+    if (this.value) {
+      this.val = this.stringify(this.parse(this.value))
+    }
     this._blur = e => {
       if (!this.$el.contains(e.target))
         this.close()
